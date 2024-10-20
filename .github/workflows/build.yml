@@ -56,7 +56,7 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'XiaoHong v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: 'new release'
+                  releaseBody: 'this is a pakeplus projectthis is a pakeplus project'
                   releaseDraft: false
                   prerelease: false
                   publish: true
