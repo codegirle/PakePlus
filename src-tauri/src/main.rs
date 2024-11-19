@@ -2,8 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{Menu, MenuItem, Submenu};
-// 对command单独管理
-mod command;
 
 fn main() {
     let edit_menu = Submenu::new(
@@ -19,15 +17,21 @@ fn main() {
             .add_native_item(MenuItem::Quit),
     );
     tauri::Builder::default()
+        .setup(|app| {
+            let _window = tauri::WindowBuilder::new(
+                app,
+                "PakePlus",
+                tauri::WindowUrl::App("https://www.xiaohongshu.com/explore".into()),
+            )
+            .initialization_script(include_str!("./extension/custom.js"))
+            .title("小红书")
+            .inner_size(1024.0, 768.0)
+            .center()
+            .user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15")
+            .build()?;
+            Ok(())
+        })
         .menu(Menu::new().add_submenu(edit_menu))
-        .invoke_handler(tauri::generate_handler![
-            command::pake::open_window,
-            command::pake::update_build_file,
-            command::pake::update_config_file,
-            command::pake::update_cargo_file,
-            command::pake::update_main_rust,
-            command::pake::update_custom_js,
-        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
