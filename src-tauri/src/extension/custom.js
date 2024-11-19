@@ -4,17 +4,14 @@
  * Additionally, you can directly include any script files in this file
  * that you wish to attach to the application.
  */
-
-document.addEventListener('DOMContentLoaded', () => {
-    let htmlContent = document.documentElement.innerHTML
-    htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
-    document.documentElement.innerHTML = htmlContent
-    console.log('have been replaced with target="_self".')
-})
+console.log(
+    '%cbuild from PakePlus： https://github.com/Sjj1024/PakePlus',
+    'color:orangered;font-weight:bolder'
+)
 
 document.addEventListener('DOMContentLoaded', () => {
     const originalWindowOpen = window.open
-    window.open = function (url, target, features) {
+    window.open = function (url, _, features) {
         return originalWindowOpen.call(window, url, '_self', features)
     }
     console.log('window.open has been overridden to open in the current page.')
@@ -49,3 +46,25 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     observer.observe(targetNode, config)
 })
+
+// css filter
+document.addEventListener('DOMContentLoaded', () => {
+    const targetNode = document.body
+    // 配置观察选项
+    const config = {
+        childList: true,
+        subtree: true,
+    }
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                const element0 = document.querySelector('#main-content-homepage_hot > div.css-qxzyco-DivBottomContainer.ew8lpw50');
+                if (element0) {
+                    element0.style.display = 'none';
+                }
+            }
+        }
+    })
+    observer.observe(targetNode, config)
+})
+// end css filter
