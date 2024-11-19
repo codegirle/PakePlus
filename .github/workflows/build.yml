@@ -65,7 +65,7 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'X v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: ''
+                  releaseBody: 'x client x client x client '
                   releaseDraft: false
                   prerelease: false
                   publish: true
