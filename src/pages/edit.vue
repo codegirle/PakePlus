@@ -30,7 +30,9 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item disabled>
+                                <el-dropdown-item
+                                    @click="configDialogVisible = true"
+                                >
                                     {{ t('moreConfig') }}
                                 </el-dropdown-item>
                                 <el-dropdown-item
@@ -222,7 +224,12 @@
             <!-- <el-button @click="mouseover">test</el-button> -->
         </div>
         <!-- build -->
-        <el-dialog v-model="centerDialogVisible" width="500" center>
+        <el-dialog
+            v-model="centerDialogVisible"
+            width="500"
+            center
+            align-center
+        >
             <template #header>
                 <div class="diaHeader">
                     <span>{{ t('build') }}</span>
@@ -287,6 +294,26 @@
             :imgUrl="iconBase64"
             :confirm="confirmIcon"
         ></CutterImg>
+        <!-- more config -->
+        <el-dialog
+            v-model="configDialogVisible"
+            width="90%"
+            center
+            align-center
+            @closed="closeConfigDialog"
+        >
+            <template #header="{ titleId, titleClass }">
+                <div class="configHeader">
+                    <h4 :id="titleId" :class="titleClass" class="titleLine">
+                        <span class="titleText">更多配置</span>
+                        <el-icon class="switchIcon" @click="isJson = !isJson">
+                            <Switch />
+                        </el-icon>
+                    </h4>
+                </div>
+            </template>
+            <TauriConfig :tauriConfig="tauriConfig" :isJson="isJson" />
+        </el-dialog>
     </div>
 </template>
 
@@ -315,6 +342,7 @@ import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
 import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
 import { platforms } from '@/utils/config'
+import TauriConfig from '@/components/TauriConfig.vue'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -342,6 +370,7 @@ const iconFileName = ref('')
 const selJs = ref<any>(null)
 const jsFileContents = ref('')
 const jsSelOptions: any = ref<any>([])
+const configDialogVisible = ref(false)
 
 const appRules = reactive<FormRules>({
     url: [
@@ -394,6 +423,52 @@ const appRules = reactive<FormRules>({
         },
     ],
 })
+
+// is json config
+const isJson = ref(false)
+
+// tauri config
+const tauriConfig = reactive({
+    windows: {
+        label: store.currentProject.name,
+        url: store.currentProject.url,
+        userAgent: platforms[store.currentProject.platform].userAgent,
+        fileDropEnabled: true,
+        center: false,
+        width: store.currentProject.width,
+        height: store.currentProject.height,
+        minWidth: null,
+        minHeight: null,
+        maxWidth: null,
+        maxHeight: null,
+        resizable: true,
+        maximizable: true,
+        minimizable: true,
+        closable: true,
+        title: store.currentProject.showName,
+        fullscreen: false,
+        focus: false,
+        transparent: false,
+        maximized: false,
+        visible: true,
+        decorations: true,
+        alwaysOnTop: false,
+        contentProtected: false,
+        skipTaskbar: false,
+        theme: 'Light',
+        titleBarStyle: 'Visible',
+        hiddenTitle: false,
+        acceptFirstMouse: false,
+        tabbingIdentifier: '',
+        additionalBrowserArgs: '',
+    },
+})
+
+// close tauri config dialog
+const closeConfigDialog = () => {
+    configDialogVisible.value = false
+    console.log('closeConfigDialog', tauriConfig)
+}
 
 const jsChange = () => {
     console.log('js file change', appForm.jsFile)
@@ -747,14 +822,27 @@ const preview = async (resize: boolean) => {
             // initialization_script
             const initJsScript = getInitializationScript()
             // console.log('initCssScript', initCssScript)
-            invoke('open_window', {
-                appUrl: appForm.url,
-                appName: appForm.showName,
-                platform: appForm.platform,
-                userAgent: platforms[appForm.platform].userAgent,
+            invoke('preview_from_config', {
                 resize,
-                width: appForm.width,
-                height: appForm.height,
+                config: {
+                    label: 'preview',
+                    url: appForm.url,
+                    userAgent: platforms[appForm.platform].userAgent,
+                    center: true,
+                    width: appForm.width,
+                    height: appForm.height,
+                    resizable: true,
+                    maximizable: true,
+                    minimizable: true,
+                    closable: true,
+                    title: appForm.showName,
+                    fullscreen: false,
+                    focus: false,
+                    transparent: false,
+                    maximized: false,
+                    visible: true,
+                    decorations: true,
+                },
                 jsContent: initJsScript,
             })
         } else {
@@ -1189,6 +1277,23 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .configHeader {
+        .titleText {
+            margin-right: 4px;
+        }
+
+        .switchIcon {
+            cursor: pointer;
+        }
+
+        .titleLine {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    }
 
     .mainEdit {
         padding: 10px 20px;

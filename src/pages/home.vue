@@ -173,7 +173,7 @@ import { appWindow } from '@tauri-apps/api/window'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { pakeUrlMap, openUrl } from '@/utils/common'
+import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
@@ -273,9 +273,11 @@ const forkProgect = async (tips: boolean = true) => {
         store.setRepository(forkRes.data)
     } else if (forkRes.status === 403) {
         // maybe account has locked
+        testLoading.value = false
         ElMessage.error(forkRes.data.message)
     } else {
         console.log('fork error', forkRes)
+        testLoading.value = false
         ElMessage.error(forkRes.data.message)
     }
     // start
@@ -353,14 +355,8 @@ const creatBranch = async () => {
         if (res.status === 201) {
             const branchInfo: Project = {
                 ...res.data,
+                ...initProject,
                 name: branchName.value,
-                desc: '',
-                url: '',
-                showName: 'PakePlus',
-                appid: 'com.pakeplus.desktop',
-                icon: '',
-                version: '0.0.1',
-                platform: 'desktop',
             }
             console.log('branch Info success', branchInfo)
             store.setCurrentProject(branchInfo)
