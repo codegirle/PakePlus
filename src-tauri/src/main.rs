@@ -1,9 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use serde_json::Error;
+use tauri::{utils::config::WindowConfig, Menu, MenuItem, Submenu, WindowBuilder};
 
-use tauri::{Menu, MenuItem, Submenu};
-// 对command单独管理
-mod command;
+fn json_to_window_config(window_json: &str) -> Result<WindowConfig, Error> {
+    serde_json::from_str(window_json)
+}
 
 fn main() {
     let edit_menu = Submenu::new(
@@ -19,15 +21,23 @@ fn main() {
             .add_native_item(MenuItem::Quit),
     );
     tauri::Builder::default()
+        .setup(|app| {
+            let app_handle = app.handle();
+            let window_json = r#"{"label":"","url":"https://www.csdn.net/","userAgent":"","fileDropEnabled":true,"center":true,"width":800,"height":600,"minWidth":null,"minHeight":null,"maxWidth":null,"maxHeight":null,"resizable":false,"maximizable":true,"minimizable":true,"closable":true,"title":"Meinv","fullscreen":false,"focus":false,"transparent":false,"maximized":false,"visible":true,"decorations":true,"alwaysOnTop":true,"contentProtected":false,"skipTaskbar":false,"titleBarStyle":"Visible","hiddenTitle":false,"acceptFirstMouse":false,"tabbingIdentifier":"","additionalBrowserArgs":""}"#;
+            match json_to_window_config(window_json) {
+                Ok(config) => {
+                    println!("Parsed WindowConfig: {:?}", config);
+                    let _main_window = WindowBuilder::from_config(&app_handle, config)
+                        .build()
+                        .unwrap();
+                }
+                Err(err) => {
+                    eprintln!("Failed to parse JSON: {}", err);
+                }
+            }
+            Ok(())
+        })
         .menu(Menu::new().add_submenu(edit_menu))
-        .invoke_handler(tauri::generate_handler![
-            command::pake::open_window,
-            command::pake::update_build_file,
-            command::pake::update_config_file,
-            command::pake::update_cargo_file,
-            command::pake::update_main_rust,
-            command::pake::update_custom_js,
-        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
