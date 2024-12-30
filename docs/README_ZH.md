@@ -53,9 +53,9 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>
         </td>
         <td>小红书(Little Red Book)
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_amd64.deb">Linux</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_amd64.deb">Linux</a>
         </td>
     </tr>
     <tr>
@@ -128,9 +128,14 @@ pnpm run dev
 pnpm run build
 ```
 
-<!-- ## 支持
+## 支持
 
 1. 如果你觉得 PakePlus 给你的生活带来了乐趣，你可以为它充点能量。
  <p align="center">
-         <img src="./pay.png" />
- </p> -->
+    <img src="./pay.png" />
+ </p>
+
+2. wechat group
+ <p align="center" >
+    <img src="./wxcode.jpg" />
+ </p>

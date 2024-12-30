@@ -278,6 +278,7 @@ const forkProgect = async (tips: boolean = true) => {
     } else if (forkRes.status === 403) {
         // maybe account has locked
         testLoading.value = false
+        // maybe token dont has promisse
         ElMessage.error(forkRes.data.message)
     } else {
         console.log('fork error', forkRes)

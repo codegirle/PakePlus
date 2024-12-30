@@ -139,12 +139,17 @@ prerelease: false：means this version is not a pre-release version, which means
 publish: false：means this version will not be published immediately, although it will be created, it will not be publicly displayed.
 ```
 
-<!-- ## Support
+## Support
 
 1. If PakePlus has brought joy to your life, feel free to support it.
- <p align="center">
-         <img src="./docs/pay.png" />
- </p> -->
+ <p align="center" >
+    <img src="./docs/pay.png" />
+ </p>
+
+2. wechat group
+ <p align="center" >
+    <img src="./docs/wxcode.jpg" />
+ </p>
 
 ## TODO
 
