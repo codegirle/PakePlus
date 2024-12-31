@@ -148,7 +148,7 @@ publish: false：means this version will not be published immediately, although 
 
 2. wechat group
  <p align="center" >
-    <img src="./docs/wxcode.jpg" />
+    <img src="./docs/wxcode.jpg" width=300/>
  </p>
 
 ## TODO
