@@ -54,9 +54,9 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/you-tube_0.0.2_amd64.deb">Linux</a>
         </td>
         <td>小红书(Little Red Book)
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_amd64.deb">Linux</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_amd64.deb">Linux</a>
         </td>
     </tr>
     <tr>
@@ -70,9 +70,9 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
             <a href="https://github.com/codegirle/PakePlus/releases/download/Tiktok/tiktok_0.0.2_amd64.deb">Linux</a>
         </td>
         <td>抖音
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/Douyin_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/Douyin_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/douyin_0.0.1_amd64.deb">Linux</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/Douyin_0.0.2_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/Douyin_0.0.2_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/douyin_0.0.2_amd64.deb">Linux</a>
         </td>
     </tr>
     <tr>
