@@ -132,5 +132,5 @@ pnpm run build
 
 1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center">
-         <img src="./docs/pay.png" />
+         <img src="./pay.png" />
  </p>

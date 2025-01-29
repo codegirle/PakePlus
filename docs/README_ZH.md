@@ -137,5 +137,5 @@ pnpm run build
 
 2. wechat group
  <p align="center" >
-    <img src="./wxcode.jpg" />
+    <img src="./wxcode.png" />
  </p>
